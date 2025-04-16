@@ -1,20 +1,19 @@
 from exceptions import ingrese_numero
+from exceptions import NumeroDebeSerPositivo
 
 def main():
-    """
-    Programa principal que solicita números al usuario y muestra los resultados.
-    """
-    while True:
+    while True: 
         try:
             numero = ingrese_numero()
-            print(f"Número válido: {numero}")
+            numero2 = ingrese_numero()
+            print(numero / numero2)
+
         except ValueError as e:
-            print(f"Error: {e}")
+            print("ingrese numero")
+        except ZeroDivisionError as e:
+            print("No se puede dividir por cero")
         except NumeroDebeSerPositivo as e:
-            print(f"Error: {e}")
-        except KeyboardInterrupt:
-            print("\nPrograma finalizado.")
-            break
+            print("El numero tiene que ser positivo")
 
 if __name__ == "__main__":
-    main() 
+    main()
