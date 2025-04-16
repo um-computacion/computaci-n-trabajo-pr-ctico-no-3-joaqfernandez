@@ -13,3 +13,13 @@ class TestCalculoNumeros(unittest.TestCase):
     def test_ingreso_numero(self, patched_input):
         numer = ingrese_numero()
         self.assertEqual(numer, 100)
+
+@patch(
+            'builtins.input',
+            return_value = '-100' #""inventa un valor falso que deberia ingresarse por el input""
+    )
+    
+    def test_ingreso_negativo(self, patch_input):
+        with self.assertRaises(NumeroDebeSerPositivo): # with mismo que exception y try, pero para los test
+            ingrese_numero()
+            ...
