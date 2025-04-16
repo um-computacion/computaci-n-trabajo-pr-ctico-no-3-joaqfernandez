@@ -23,3 +23,16 @@ class TestCalculoNumeros(unittest.TestCase):
         with self.assertRaises(NumeroDebeSerPositivo): # with mismo que exception y try, pero para los test
             ingrese_numero()
             ...
+
+@patch(
+            'builtins.input',
+            return_value = 'aaa'
+    )
+
+    def test_ingreso_letra(self, patch_input):
+        with self.assertRaises(ValueError): #assertRaises() to verify that a specific exception gets raised.
+            ingrese_numero()
+
+
+if __name__ == '__main__':
+    unittest.main()
