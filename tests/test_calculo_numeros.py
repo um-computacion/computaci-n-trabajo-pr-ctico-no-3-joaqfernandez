@@ -1,35 +1,38 @@
 import unittest
-from src.exceptions import (
-    ingrese_numero,
-    NumeroDebeSerPositivo,
-)
+from src.exceptions import ingrese_numero
+from src.exceptions import NumeroDebeSerPositivo
 from unittest.mock import patch
 
 class TestCalculoNumeros(unittest.TestCase):
 
-    @patch(  # este patch controla lo que hace el input
-        'builtins.input',
-        return_value='100'
+    @patch(
+            'builtins.input',
+            return_value = '100'
     )
-    def test_ingreso_feliz(self, patch_input):
-        numero = ingrese_numero()
-        self.assertEqual(numero, 100)
 
-    @patch(  # este patch controla lo que hace el input
-        'builtins.input',
-        return_value='-100'
-    )
+    def test_ingreso_numero(self, patched_input):
+        numer = ingrese_numero()
+        self.assertEqual(numer, 100)
+
+    @patch(
+                'builtins.input',
+                return_value = '-100' #""inventa un valor falso que deberia ingresarse por el input""
+        )
+        
     def test_ingreso_negativo(self, patch_input):
-        with self.assertRaises(NumeroDebeSerPositivo):
-            ingrese_numero()
+            with self.assertRaises(NumeroDebeSerPositivo): # with mismo que exception y try, pero para los test
+                ingrese_numero()
+                ...
 
-    @patch(  # este patch controla lo que hace el input
-        'builtins.input',
-        return_value='AAA'
-    )
-    def test_ingreso_letras(self, patch_input):
-        with self.assertRaises(ValueError):
-            ingrese_numero()
+    @patch(
+                'builtins.input',
+                return_value = 'aaa'
+        )
+
+    def test_ingreso_letra(self, patch_input):
+            with self.assertRaises(ValueError): #assertRaises() to verify that a specific exception gets raised.
+                ingrese_numero()
+
 
 if __name__ == '__main__':
-    unittest.main() 
+    unittest.main()
